@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#16213e">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="نلورا">
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="icon-192.png">
+<link rel="apple-touch-icon" href="icon-192.png">
+<title>نلورا | حسابداری</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css">
+<style>
+:root{--navy:#16213e;--navy2:#22305a;--cream:#f6efe0;--cream2:#fffaf0;--gold:#b8955a;--ok:#2e7d5b;--bad:#b3413a;--line:#e4d9c0}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{margin:0;font-family:Vazirmatn,Tahoma,sans-serif;background:var(--cream);color:var(--navy);padding-bottom:84px}
+#splash{position:fixed;inset:0;background:#fff;z-index:100;display:flex;flex-direction:column;align-items:center;justify-content:center;transition:opacity .5s}
+#splash img{width:min(70vw,300px);animation:pop .8s ease}
+#splash.hide{opacity:0;pointer-events:none}
+@keyframes pop{from{transform:scale(.85);opacity:0}to{transform:scale(1);opacity:1}}
+header{background:var(--navy);color:var(--cream);padding:12px 16px;position:sticky;top:0;z-index:5}
+.top{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.brand{display:flex;align-items:center;gap:10px;font-size:19px;font-weight:700;letter-spacing:.5px}
+.brand img{height:40px;width:40px;border-radius:10px;background:#fff;object-fit:cover}
+.who{font-size:12px;opacity:.9;text-align:left}.who button{background:none;border:1px solid var(--gold);color:var(--cream);border-radius:8px;padding:3px 10px;margin-top:3px;font:inherit;font-size:11px}
+.quote{margin-top:10px;font-size:12.5px;line-height:1.9;background:var(--navy2);border-radius:10px;padding:8px 12px;color:#f3e3bd}
+main{padding:14px;max-width:640px;margin:auto}
+.card{background:var(--cream2);border:1px solid var(--line);border-radius:14px;padding:14px;margin-bottom:12px;box-shadow:0 1px 3px rgba(22,33,62,.06)}
+.card h3{margin:0 0 10px;font-size:15px}
+.row{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:7px 0;border-bottom:1px dashed var(--line);font-size:13.5px}
+.row:last-child{border:0}
+.big{font-size:20px;font-weight:700}
+.muted{color:#7b7466;font-size:12px}
+.pos{color:var(--ok)}.neg{color:var(--bad)}
+.btn{background:var(--navy);color:var(--cream);border:0;border-radius:12px;padding:12px 16px;font:inherit;font-size:14px;font-weight:600;width:100%}
+.btn.gold{background:var(--gold)}.btn.ghost{background:none;color:var(--navy);border:1px solid var(--navy)}
+.btn.sm{width:auto;padding:6px 12px;font-size:12px;border-radius:9px}
+.fab{position:fixed;left:16px;bottom:86px;width:56px;height:56px;border-radius:50%;background:var(--gold);color:#fff;font-size:30px;border:0;box-shadow:0 4px 12px rgba(0,0,0,.25);z-index:6}
+nav{position:fixed;bottom:0;right:0;left:0;background:var(--navy);display:flex;padding:6px 2px calc(6px + env(safe-area-inset-bottom));z-index:7}
+nav button{flex:1;background:none;border:0;color:#b9b3a3;font:inherit;font-size:10.5px;padding:6px 0;display:flex;flex-direction:column;align-items:center;gap:2px}
+nav button span{font-size:19px}nav button.on{color:var(--gold);font-weight:700}
+.grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.pc{background:var(--navy);color:var(--cream);border-radius:12px;padding:10px 6px;text-align:center}
+.pc small{display:block;opacity:.8;font-size:11px}.pc b{font-size:14px;display:block;margin-top:4px;color:#f3e3bd}
+.wknav{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
+.wknav button{background:var(--navy);color:var(--cream);border:0;border-radius:10px;width:38px;height:38px;font-size:18px}
+.wknav div{text-align:center;font-weight:700;font-size:14px}
+.bar{height:10px;background:var(--line);border-radius:6px;overflow:hidden;margin:8px 0}.bar i{display:block;height:100%;background:var(--gold)}
+.tag{display:inline-block;border-radius:8px;padding:2px 9px;font-size:11px;background:#e7dcc0}.tag.g{background:#d5ecdf;color:var(--ok)}.tag.r{background:#f4d9d6;color:var(--bad)}
+input,select,textarea{width:100%;font:inherit;font-size:14px;padding:11px;border:1px solid var(--line);border-radius:10px;background:#fff;color:var(--navy)}
+label{display:block;font-size:12.5px;margin:10px 0 4px;font-weight:600}
+.dt{display:flex;gap:6px}.dt select{padding:11px 4px}
+.ov{position:fixed;inset:0;background:rgba(22,33,62,.55);z-index:20;display:flex;align-items:flex-end;justify-content:center}
+.sheet{background:var(--cream);width:100%;max-width:640px;max-height:92vh;overflow:auto;border-radius:20px 20px 0 0;padding:16px 16px calc(20px + env(safe-area-inset-bottom))}
+.sheet h2{margin:0 0 4px;font-size:17px}
+.login{min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:24px;background:var(--navy);color:var(--cream)}
+.login .box{background:var(--cream);color:var(--navy);border-radius:18px;padding:20px;max-width:420px;width:100%;margin:auto}
+.login .lg{text-align:center;background:#fff;border-radius:14px;margin:-6px -6px 10px;padding:6px}.login .lg img{width:190px;max-width:70%}
+.msg{font-size:12.5px;color:var(--bad);min-height:18px;margin-top:8px}
+.empty{text-align:center;color:#8d8570;padding:26px 0;font-size:13px}
+.acts{display:flex;gap:6px;margin-top:8px}
+.cod{font-family:monospace;direction:ltr;display:inline-block;background:var(--navy);color:#f3e3bd;border-radius:7px;padding:1px 8px;font-size:12px}
+.log{font-size:12.5px;padding:8px 0;border-bottom:1px dashed var(--line);line-height:1.8}
+.log:last-child{border:0}
+</style>
+</head>
+<body>
+<div id="splash"><img src="logo.png" alt="Nelora"></div>
+<div id="app"></div>
+<script>
+const URL_='https://atrfyfwwhtzxarnpjnlu.supabase.co';
+const KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImF0cmZ5Znd3aHR6eGFybnBqbmx1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODQ2MTI5MjcsImV4cCI6MjEwMDE4ODkyN30.o-nD3ROsmmUSpQHbziQi7qKz4qdRAC9EXhDino95wL8';
+const CAPITAL=16000000;
+const SERVICES=[['فیشال کلاسیک',1200000],['لاین دورچشم',600000],['لاین ضدجوش و پوست چرب',1200000],['لاین لک',1200000],['فیشال وی آی پی',1500000],['سایر',0]];
+const NAMES=['مهناز کشاورزی','صبا ترکی','فرنوش میرزایی'];
+const MN=['فروردین','اردیبهشت','خرداد','تیر','مرداد','شهریور','مهر','آبان','آذر','دی','بهمن','اسفند'];
+const QUOTES=['هر روز یک قدم کوچک، یک سال بعد یک تغییر بزرگ است.','موفقیت یعنی ادامه دادن، وقتی دیگران توقف می‌کنند.','اعتماد مشتری، بزرگ‌ترین سرمایه‌ی شماست.','کار گروهی؛ رؤیا را به واقعیت تبدیل می‌کند.','امروز را بهتر از دیروز بساز.','کیفیت، بهترین تبلیغ است.','شریک خوب، نصف موفقیت است.','با لبخند شروع کن؛ مشتری انرژی‌ات را حس می‌کند.','برای رسیدن به قله، از پای کوه شروع کن.','صبر و پشتکار، کلید هر کسب‌وکاری است.','هر مشتری راضی، تبلیغ‌کننده‌ی رایگان توست.','دقت در حساب‌وکتاب، آرامش شراکت است.','بزرگ فکر کن، از امروز شروع کن.','زیبایی از مراقبت می‌آید؛ تو مراقب‌ترین باش.'];
+
+/* ---------- Jalali ---------- */
+const div=(a,b)=>~~(a/b),mod=(a,b)=>a-~~(a/b)*b;
+const BR=[-61,9,38,199,426,686,756,818,1111,1181,1210,1635,2060,2097,2192,2262,2324,2394,2456,3178];
+function jalCal(jy){let gy=jy+621,leapJ=-14,jp=BR[0],jm,jump,n,i;for(i=1;i<BR.length;i++){jm=BR[i];jump=jm-jp;if(jy<jm)break;leapJ+=div(jump,33)*8+div(mod(jump,33),4);jp=jm}
+n=jy-jp;leapJ+=div(n,33)*8+div(mod(n,33)+3,4);if(mod(jump,33)===4&&jump-n===4)leapJ++;
+const leapG=div(gy,4)-div((div(gy,100)+1)*3,4)-150,march=20+leapJ-leapG;if(jump-n<6)n=n-jump+div(jump+4,33)*33;
+let leap=mod(mod(n+1,33)-1,4);if(leap===-1)leap=4;return{leap,gy,march}}
+function g2d(gy,gm,gd){let d=div((gy+div(gm-8,6)+100100)*1461,4)+div(153*mod(gm+9,12)+2,5)+gd-34840408;return d-div(div(gy+100100+div(gm-8,6),100)*3,4)+752}
+function d2g(j){let x=4*j+139361631;x+=div(div(4*j+183187720,146097)*3,4)*4-3908;const i=div(mod(x,1461),4)*5+308,gd=div(mod(i,153),5)+1,gm=mod(div(i,153),12)+1;return{gy:div(x,1461)-100100+div(8-gm,6),gm,gd}}
+function j2d(jy,jm,jd){const r=jalCal(jy);return g2d(r.gy,3,r.march)+(jm-1)*31-div(jm,7)*(jm-7)+jd-1}
+function d2j(j){const gy=d2g(j).gy;let jy=gy-621;const r=jalCal(jy),f=g2d(gy,3,r.march);let k=j-f,jm,jd;
+if(k>=0){if(k<=185){return{jy,jm:1+div(k,31),jd:mod(k,31)+1}}k-=186}else{jy--;k+=179;if(r.leap===1)k++}
+return{jy,jm:7+div(k,30),jd:mod(k,30)+1}}
+const nowJdn=()=>{const d=new Date();return g2d(d.getFullYear(),d.getMonth()+1,d.getDate())};
+const jstr=o=>o.jy+'/'+String(o.jm).padStart(2,'0')+'/'+String(o.jd).padStart(2,'0');
+const jdn=s=>{if(!s)return 0;const[a,b,c]=s.split('/').map(Number);return j2d(a,b,c)};
+const pd=x=>String(x).replace(/\d/g,d=>'۰۱۲۳۴۵۶۷۸۹'[d]);
+const pretty=s=>{if(!s)return '—';const[a,b,c]=s.split('/').map(Number);return pd(c)+' '+MN[b-1]+' '+pd(a)};
+const wStart=j=>j-(mod(j,7)+2)%7; // شنبه
+
+/* ---------- helpers ---------- */
+const $=s=>document.querySelector(s);
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const fa=n=>Math.round(n).toLocaleString('fa-IR');
+const T=n=>fa(n)+' تومان';
+const num=s=>+String(s||'').replace(/[۰-۹]/g,d=>'۰۱۲۳۴۵۶۷۸۹'.indexOf(d)).replace(/[٠-٩]/g,d=>'٠١٢٣٤٥٦٧٨٩'.indexOf(d)).replace(/[,٬\s]/g,'')||0;
+const lat=s=>String(s||'').replace(/[۰-۹]/g,d=>'۰۱۲۳۴۵۶۷۸۹'.indexOf(d)).replace(/[٠-٩]/g,d=>'٠١٢٣٤٥٦٧٨٩'.indexOf(d));
+const sum=(a,f)=>a.reduce((s,x)=>s+f(x),0);
+let U=null,P=null,D=[],tab='home',wk=wStart(nowJdn()),q='',rp={who:'همه',per:'month'};
+const items=k=>D.filter(x=>x.kind===k);
+const altProfit=x=>(num(x.data.sell)-num(x.data.buy))*num(x.data.qty);
+const isPaid=x=>x.data.status==='پرداخت شد';
+
+async function rpc(fn,args){const r=await fetch(URL_+'/rest/v1/rpc/'+fn,{method:'POST',headers:{apikey:KEY,Authorization:'Bearer '+KEY,'Content-Type':'application/json'},body:JSON.stringify(args)});
+if(!r.ok)throw new Error(await r.text());return r.json()}
+async function load(){try{D=await rpc('nl_list',{p_name:U,p_pass:P});render()}catch(e){if(String(e).includes('auth'))logout();else toast('خطا در اتصال به اینترنت')}}
+function toast(t,ok){const d=document.createElement('div');d.textContent=t;d.style.cssText='position:fixed;top:14px;right:50%;transform:translateX(50%);background:'+(ok?'#2e7d5b':'#b3413a')+';color:#fff;padding:9px 16px;border-radius:10px;z-index:99;font-size:13px';document.body.appendChild(d);setTimeout(()=>d.remove(),2600)}
+
+/* ---------- Login ---------- */
+async function showLogin(){
+$('#app').innerHTML=`<div class="login"><div class="box"><div class="lg"><img src="logo.png" alt="Nelora"></div><div class="muted" style="text-align:center;margin-bottom:10px">اتاق پاکسازی پوست · حسابداری شرکا</div>
+<label>نام شما</label><select id="ln">${NAMES.map(n=>`<option>${n}</option>`).join('')}</select>
+<label id="lp">رمز عبور</label><input id="lw" type="password" autocomplete="current-password">
+<div class="msg" id="lm"></div><button class="btn" id="lb">ورود</button></div></div>`;
+let st=[];try{st=await rpc('nl_status',{})}catch(e){$('#lm').textContent='اتصال به سرور برقرار نشد'}
+const upd=()=>{const s=st.find(x=>x.name===$('#ln').value);$('#lp').textContent=s&&!s.has_pass?'اولین ورود: یک رمز دلخواه برای خودت انتخاب کن (حداقل ۴ کاراکتر)':'رمز عبور'};
+$('#ln').onchange=upd;upd();
+$('#lb').onclick=async()=>{const n=$('#ln').value,p=$('#lw').value;$('#lm').textContent='';
+try{const r=await rpc('nl_login',{p_name:n,p_pass:p});
+if(r==='ok'||r==='created'){U=n;P=p;localStorage.setItem('nl',JSON.stringify({U,P}));start()}
+else $('#lm').textContent=r==='short'?'رمز باید حداقل ۴ کاراکتر باشد':'رمز اشتباه است'}catch(e){$('#lm').textContent='خطا در ارتباط با سرور'}}}
+function logout(){localStorage.removeItem('nl');U=P=null;showLogin()}
+
+/* ---------- Forms ---------- */
+function dateField(id,val,opt,yr){const t=nowJdn(),cy=d2j(t).jy;let v=val?val.split('/').map(Number):(opt?[0,0,0]:(o=>[o.jy,o.jm,o.jd])(d2j(t)));
+const [y0,y1]=yr||[cy-1,cy+2];let ys='<option value="">سال</option>';for(let y=y1;y>=y0;y--)ys+=`<option value="${y}"${v[0]===y?' selected':''}>${pd(y)}</option>`;
+let ms='<option value="">ماه</option>'+MN.map((m,i)=>`<option value="${i+1}"${v[1]===i+1?' selected':''}>${m}</option>`).join('');
+let ds='<option value="">روز</option>';for(let d=1;d<=31;d++)ds+=`<option value="${d}"${v[2]===d?' selected':''}>${pd(d)}</option>`;
+return `<div class="dt" id="${id}"><select>${ds}</select><select>${ms}</select><select>${ys}</select></div>`}
+const getDate=id=>{const s=[...document.querySelectorAll('#'+id+' select')].map(x=>x.value);return s.some(x=>!x)?'':`${s[2]}/${String(s[1]).padStart(2,'0')}/${String(s[0]).padStart(2,'0')}`};
+function openForm(title,fields,init,onSave){
+const o=document.createElement('div');o.className='ov';
+o.innerHTML=`<div class="sheet"><h2>${title}</h2>${fields.map(f=>{const v=init[f.k]??f.d??'';let c;
+if(f.t==='date')c=dateField('f_'+f.k,v,f.opt,f.yr);
+else if(f.t==='sel')c=`<select data-k="${f.k}">${f.o.map(x=>{const[a,b]=Array.isArray(x)?x:[x,x];return `<option value="${esc(a)}"${a===v?' selected':''}>${esc(b)}</option>`}).join('')}</select>`;
+else if(f.t==='area')c=`<textarea rows="3" data-k="${f.k}">${esc(v)}</textarea>`;
+else c=`<input data-k="${f.k}" value="${esc(v)}" ${f.t==='num'?'inputmode="decimal"':''} ${f.t==='tel'?'inputmode="tel"':''}>`;
+return `<label>${f.l}</label>${c}`}).join('')}<div class="msg" id="fm"></div>
+<div style="display:flex;gap:8px;margin-top:6px"><button class="btn" id="fs">ذخیره</button><button class="btn ghost" id="fc" style="width:40%">انصراف</button></div></div>`;
+document.body.appendChild(o);o.onclick=e=>{if(e.target===o)o.remove()};$('#fc').onclick=()=>o.remove();
+fields.forEach(f=>{if(f.on)o.querySelector(`[data-k="${f.k}"]`).addEventListener('change',()=>f.on(o))});
+$('#fs').onclick=async()=>{const d={};for(const f of fields){d[f.k]=f.t==='date'?getDate('f_'+f.k):(o.querySelector(`[data-k="${f.k}"]`).value||'').trim();
+if(f.r&&!d[f.k]){$('#fm').textContent='«'+f.l+'» را وارد کنید';return}}
+try{$('#fs').disabled=true;await onSave(d);o.remove();await load()}catch(e){$('#fm').textContent='ذخیره نشد؛ اینترنت را بررسی کنید';$('#fs').disabled=false}}}
+const save=(id,kind,data)=>rpc('nl_save',{p_name:U,p_pass:P,p_id:id||null,p_kind:kind,p_data:data});
+async function del(id){if(!confirm('این مورد حذف شود؟'))return;await rpc('nl_del',{p_name:U,p_pass:P,p_id:id});load()}
+const by=x=>`<span class="muted">ثبت: ${esc(x.by)}</span>`;
+const acts=id=>`<div class="acts"><button class="btn sm ghost" onclick="edit('${id}')">ویرایش</button><button class="btn sm ghost" onclick="del('${id}')">حذف</button></div>`;
+
+/* ---------- Form definitions ---------- */
+const svcOpts=SERVICES.map(([n,p])=>[n,p?`${n} — ${fa(p)} تومان`:n]);
+const F={
+capital:()=>[{k:'partner',l:'نام شریک',t:'sel',o:NAMES,d:U},{k:'product',l:'نام محصول',r:1},{k:'qty',l:'تعداد',t:'num',r:1},{k:'price',l:'قیمت خرید هر عدد (تومان)',t:'num',r:1},{k:'date',l:'تاریخ',t:'date'}],
+session:()=>[{k:'date',l:'تاریخ پاکسازی',t:'date'},
+{k:'ccode',l:'مشتری (از لیست مشتریان)',t:'sel',o:[['','— انتخاب مشتری —'],...items('customer').map(c=>[c.data.code,`${c.data.name} (${c.data.code})`])]},
+{k:'client',l:'یا نام مشتری (اگر در لیست نیست)'},
+{k:'service',l:'نوع خدمات',t:'sel',o:svcOpts,d:SERVICES[0][0],on:o=>{const s=SERVICES.find(x=>x[0]===o.querySelector('[data-k="service"]').value);if(s&&s[1])o.querySelector('[data-k="price"]').value=s[1]}},
+{k:'price',l:'قیمت (تومان)',t:'num',d:SERVICES[0][1]},{k:'status',l:'وضعیت پرداخت',t:'sel',o:['پرداخت شد','رایگان']},{k:'note',l:'توضیحات',t:'area'}],
+alt:()=>[{k:'name',l:'نام محصول',r:1},{k:'qty',l:'تعداد',t:'num',r:1},{k:'buy',l:'قیمت خرید (تومان)',t:'num',r:1},{k:'sell',l:'قیمت فروش (تومان)',t:'num',r:1},{k:'date',l:'تاریخ فروش',t:'date'}],
+customer:()=>[{k:'name',l:'نام و نام خانوادگی',r:1},{k:'phone',l:'شماره همراه',t:'tel'},{k:'bday',l:'تاریخ تولد',t:'date',opt:1,yr:[1320,1415]},{k:'cdate',l:'تاریخ پاکسازی',t:'date'},{k:'rdate',l:'تاریخ یادآوری مجدد',t:'date',opt:1},{k:'routine',l:'روتین بعد از پاکسازی',t:'sel',o:['خیر','بله']},{k:'products',l:'محصولات تهیه‌شده',t:'area'},{k:'rprofit',l:'سود فروش روتین (تومان)',t:'num',d:0}]};
+const TITLES={capital:'ثبت سرمایه / محصول واردشده',session:'ثبت پاکسازی',alt:'ثبت محصول علی‌البدل',customer:'ثبت مشتری'};
+const nextCode=()=>'NL-'+(Math.max(99,...items('customer').map(x=>+String(x.data.code||'').replace(/\D/g,'')||0))+1);
+function add(kind){const init={};if(kind==='customer')init.code=nextCode();
+openForm(TITLES[kind],F[kind](),init,d=>{
+if(kind==='customer')d.code=init.code;
+if(kind==='session'&&d.ccode&&!d.client){const c=items('customer').find(x=>x.data.code===d.ccode);if(c)d.client=c.data.name}
+return save(null,kind,d)})}
+function edit(id){const x=D.find(i=>i.id===id);openForm('ویرایش',F[x.kind](),x.data,d=>{if(x.kind==='customer')d.code=x.data.code;
+if(x.kind==='session'&&d.ccode&&!d.client){const c=items('customer').find(y=>y.data.code===d.ccode);if(c)d.client=c.data.name}
+return save(id,x.kind,d)})}
+
+/* ---------- Views ---------- */
+function weekCalc(ws){const inW=s=>{const j=jdn(s);return j>=ws&&j<ws+7};
+const clean=sum(items('session').filter(x=>inW(x.data.date)&&isPaid(x)),x=>num(x.data.price));
+const alt=sum(items('alt').filter(x=>inW(x.data.date)),altProfit);
+const rou=sum(items('customer').filter(x=>inW(x.data.cdate)),x=>num(x.data.rprofit));
+return{clean,alt,rou,tot:clean+alt+rou}}
+function vHome(){const w=weekCalc(wk),a=jstr(d2j(wk)),b=jstr(d2j(wk+6)),sh=w.tot/3;
+const cap=sum(items('capital'),x=>num(x.data.qty)*num(x.data.price));
+const t=nowJdn(),rem=items('customer').filter(x=>x.data.rdate).map(x=>({x,j:jdn(x.data.rdate)})).filter(o=>o.j>=t-3&&o.j<=t+7).sort((p,q)=>p.j-q.j);
+return `<div class="wknav"><button onclick="wk+=7;render()">›</button><div>هفته ${pretty(a)} تا ${pretty(b)}<div class="muted">${wk===wStart(t)?'هفته جاری':''}</div></div><button onclick="wk-=7;render()">‹</button></div>
+<div class="card"><h3>سود این هفته</h3>
+<div class="row"><span>پاکسازی‌ها (پرداخت‌شده)</span><b>${T(w.clean)}</b></div>
+<div class="row"><span>فروش محصولات علی‌البدل</span><b>${T(w.alt)}</b></div>
+<div class="row"><span>روتین بعد از پاکسازی</span><b>${T(w.rou)}</b></div>
+<div class="row"><span class="big">مجموع</span><span class="big pos">${T(w.tot)}</span></div></div>
+<div class="card"><h3>سهم هر نفر (تقسیم بر ۳)</h3><div class="grid3">${NAMES.map(n=>`<div class="pc"><small>${n}</small><b>${T(sh)}</b></div>`).join('')}</div></div>
+<div class="card"><h3>سرمایه</h3><div class="row"><span>سرمایه اولیه</span><b>${T(CAPITAL)}</b></div><div class="row"><span>واردشده تاکنون</span><b>${T(cap)}</b></div>
+<div class="bar"><i style="width:${Math.min(100,cap/CAPITAL*100)}%"></i></div></div>
+${rem.length?`<div class="card"><h3>🔔 یادآوری مشتریان</h3>${rem.map(o=>`<div class="row"><span>${esc(o.x.data.name)}<br><span class="muted">${esc(lat(o.x.data.phone))}</span></span><span class="tag ${o.j<t?'r':'g'}">${pretty(o.x.data.rdate)}</span></div>`).join('')}</div>`:''}`}
+function vCap(){const per=NAMES.map(n=>({n,v:sum(items('capital').filter(x=>x.data.partner===n),x=>num(x.data.qty)*num(x.data.price))}));const tot=sum(per,p=>p.v);
+const l=items('capital').slice().reverse();
+return `<div class="card"><h3>سرمایه واردشده هر شریک</h3><div class="grid3">${per.map(p=>`<div class="pc"><small>${p.n}</small><b>${T(p.v)}</b></div>`).join('')}</div>
+<div class="row" style="margin-top:8px"><span>مجموع واردشده</span><b>${T(tot)}</b></div><div class="row"><span>سرمایه اولیه</span><b>${T(CAPITAL)}</b></div>
+<div class="row"><span>${tot>CAPITAL?'مازاد':'باقی‌مانده'}</span><b class="${tot>CAPITAL?'pos':'neg'}">${T(Math.abs(CAPITAL-tot))}</b></div></div>
+${l.length?l.map(x=>`<div class="card"><div class="row"><b>${esc(x.data.product)}</b><span class="tag">${esc(x.data.partner)}</span></div>
+<div class="muted">${fa(num(x.data.qty))} عدد × ${T(num(x.data.price))} = <b>${T(num(x.data.qty)*num(x.data.price))}</b></div><div class="muted">${pretty(x.data.date)} · ${by(x)}</div>${acts(x.id)}</div>`).join(''):'<div class="empty">هنوز محصولی ثبت نشده</div>'}`}
+function vSes(){const l=items('session').slice().sort((a,b)=>jdn(b.data.date)-jdn(a.data.date));
+return l.length?l.map(x=>`<div class="card"><div class="row"><b>${esc(x.data.client)||'—'}${x.data.ccode?` <span class="cod">${esc(x.data.ccode)}</span>`:''}</b><span class="tag ${x.data.status==='رایگان'?'':'g'}">${esc(x.data.status)}</span></div>
+${x.data.service?`<div class="row"><span>خدمات: ${esc(x.data.service)}</span></div>`:''}
+<div class="row"><span>${pretty(x.data.date)}</span><b>${x.data.status==='رایگان'?'—':T(num(x.data.price))}</b></div>${x.data.note?`<div class="muted">${esc(x.data.note)}</div>`:''}<div class="muted">${by(x)}</div>${acts(x.id)}</div>`).join(''):'<div class="empty">هنوز پاکسازی ثبت نشده</div>'}
+function vAlt(){const l=items('alt').slice().sort((a,b)=>jdn(b.data.date)-jdn(a.data.date));
+return `<div class="card"><div class="row"><span>مجموع سود علی‌البدل</span><b class="pos">${T(sum(l,altProfit))}</b></div></div>`+(l.length?l.map(x=>`<div class="card"><div class="row"><b>${esc(x.data.name)}</b><span class="tag g">سود ${T(altProfit(x))}</span></div>
+<div class="muted">تعداد ${fa(num(x.data.qty))} · خرید ${T(num(x.data.buy))} · فروش ${T(num(x.data.sell))}</div><div class="muted">${pretty(x.data.date)} · ${by(x)}</div>${acts(x.id)}</div>`).join(''):'<div class="empty">هنوز محصولی ثبت نشده</div>')}
+function vCus(){const s=lat(q).toLowerCase();let l=items('customer').slice().reverse();
+if(s)l=l.filter(x=>[x.data.code,x.data.name,lat(x.data.phone)].join(' ').toLowerCase().includes(s));
+return `<input id="sq" placeholder="جستجو با کد، نام یا شماره…" value="${esc(q)}" oninput="q=this.value;clearTimeout(window._t);window._t=setTimeout(()=>{render();const e=$('#sq');e.focus();e.setSelectionRange(99,99)},250)" style="margin-bottom:12px">`+
+(l.length?l.map(x=>{const d=x.data;
+const h=items('session').filter(s=>s.data.ccode===d.code||(!s.data.ccode&&s.data.client&&s.data.client===d.name)).sort((a,b)=>jdn(b.data.date)-jdn(a.data.date));
+return `<div class="card"><div class="row"><b>${esc(d.name)}</b><span class="cod">${esc(d.code)}</span></div>
+<div class="row"><span>📞 ${esc(lat(d.phone))||'—'}</span><span class="muted">تولد: ${pretty(d.bday)}</span></div>
+<div class="row"><span>پاکسازی: ${pretty(d.cdate)}</span><span>یادآوری: ${pretty(d.rdate)}</span></div>
+<div class="row"><span>روتین بعد از پاکسازی</span><span class="tag ${d.routine==='بله'?'g':''}">${esc(d.routine)}</span></div>
+${h.length?`<div class="muted" style="margin-top:6px"><b>خدمات دریافت‌شده:</b><br>${h.slice(0,6).map(s=>`${pretty(s.data.date)} · ${esc(s.data.service||'—')}`).join('<br>')}</div>`:''}
+${d.products?`<div class="muted">محصولات: ${esc(d.products)}</div>`:''}${num(d.rprofit)?`<div class="muted">سود روتین: ${T(num(d.rprofit))}</div>`:''}<div class="muted">${by(x)}</div>${acts(x.id)}</div>`}).join(''):'<div class="empty">مشتری‌ای پیدا نشد</div>')}
+
+/* ---------- Report ---------- */
+function rng(){const t=nowJdn();if(rp.per==='week')return[wStart(t),wStart(t)+6];
+if(rp.per==='month'){const c=d2j(t),a=j2d(c.jy,c.jm,1),nx=c.jm===12?j2d(c.jy+1,1,1):j2d(c.jy,c.jm+1,1);return[a,nx-1]}return[-1e9,1e9]}
+const dateOf=x=>x.kind==='customer'?x.data.cdate:x.data.date;
+function vRep(){const[a,b]=rng(),inR=x=>{const j=jdn(dateOf(x));return j>=a&&j<=b};
+const all=D.filter(inR),mine=rp.who==='همه'?all:all.filter(x=>x.by===rp.who),k=(r,kd)=>r.filter(x=>x.kind===kd);
+const ses=k(mine,'session'),paid=ses.filter(isPaid);
+const clean=sum(paid,x=>num(x.data.price)),alt=sum(k(mine,'alt'),altProfit),rou=sum(k(mine,'customer'),x=>num(x.data.rprofit)),cap=sum(k(mine,'capital'),x=>num(x.data.qty)*num(x.data.price));
+const gTot=sum(k(all,'session').filter(isPaid),x=>num(x.data.price))+sum(k(all,'alt'),altProfit)+sum(k(all,'customer'),x=>num(x.data.rprofit));
+const svc={};ses.forEach(x=>{const n=x.data.service||'نامشخص';svc[n]=(svc[n]||0)+1});
+const log=mine.slice().sort((p,q)=>jdn(dateOf(q))-jdn(dateOf(p))).slice(0,100);
+const line=x=>{const d=x.data;return x.kind==='session'?`✨ پاکسازی — ${esc(d.service||'')} — ${esc(d.client||'')} — ${d.status==='رایگان'?'رایگان':T(num(d.price))}`:
+x.kind==='alt'?`🛍️ علی‌البدل — ${esc(d.name)} — سود ${T(altProfit(x))}`:
+x.kind==='capital'?`💰 سرمایه — ${esc(d.product)} (${esc(d.partner)}) — ${T(num(d.qty)*num(d.price))}`:
+`👥 مشتری — ${esc(d.name)} (${esc(d.code)})`};
+return `<div class="card"><div class="grid2"><div><label style="margin-top:0">شریک</label><select onchange="rp.who=this.value;render()">${['همه',...NAMES].map(n=>`<option${n===rp.who?' selected':''}>${n}</option>`).join('')}</select></div>
+<div><label style="margin-top:0">بازه زمانی</label><select onchange="rp.per=this.value;render()">${[['week','این هفته'],['month','این ماه'],['all','کل دوره']].map(([v,l])=>`<option value="${v}"${v===rp.per?' selected':''}>${l}</option>`).join('')}</select></div></div></div>
+<div class="card"><h3>خلاصه ${rp.who==='همه'?'همه شرکا':esc(rp.who)}</h3>
+<div class="row"><span>تعداد پاکسازی (پرداخت‌شده / رایگان)</span><b>${fa(paid.length)} / ${fa(ses.length-paid.length)}</b></div>
+<div class="row"><span>درآمد پاکسازی‌ها</span><b>${T(clean)}</b></div>
+<div class="row"><span>سود علی‌البدل ثبت‌شده</span><b>${T(alt)}</b></div>
+<div class="row"><span>سود روتین</span><b>${T(rou)}</b></div>
+<div class="row"><span>جمع سود ثبت‌شده</span><b class="pos">${T(clean+alt+rou)}</b></div>
+<div class="row"><span>سرمایه واردشده</span><b>${T(cap)}</b></div>
+<div class="row"><span>مشتریان ثبت‌شده</span><b>${fa(k(mine,'customer').length)}</b></div>
+<div class="row"><span>${rp.who==='همه'?'سهم هر نفر از سود کل (÷۳)':'سهم او از سود کل شرکت (÷۳)'}</span><b class="pos">${T(gTot/3)}</b></div></div>
+${Object.keys(svc).length?`<div class="card"><h3>خدمات انجام‌شده</h3>${Object.entries(svc).map(([n,c])=>`<div class="row"><span>${esc(n)}</span><b>${fa(c)} بار</b></div>`).join('')}</div>`:''}
+<div class="card"><h3>همه اقدامات ثبت‌شده</h3>${log.length?log.map(x=>`<div class="log">${line(x)}<br><span class="muted">${pretty(dateOf(x))} · ${esc(x.by)}</span></div>`).join(''):'<div class="empty">موردی در این بازه نیست</div>'}</div>
+<div class="card"><h3>🛡️ پشتیبان‌گیری</h3><div class="muted" style="margin-bottom:10px">هر روز یک نسخه پشتیبان خودکار روی سرور ذخیره می‌شود و موارد حذف‌شده هم از بین نمی‌روند. برای اطمینان بیشتر، فایل پشتیبان را روی گوشی نگه دار.</div>
+<button class="btn" onclick="dlBackup()">دانلود فایل پشتیبان</button>
+<div style="height:8px"></div><button class="btn ghost" onclick="srvBackup()">ساخت نسخه پشتیبان روی سرور</button>
+<div style="height:8px"></div><button class="btn ghost" onclick="$('#rf').click()">بازیابی از فایل پشتیبان</button>
+<input type="file" id="rf" accept=".json,application/json" style="display:none" onchange="restoreFile(this)"></div>`}
+function dlBackup(){const blob=new Blob([JSON.stringify({app:'nelora',at:new Date().toISOString(),rows:D})],{type:'application/json'});
+const a=document.createElement('a'),d=jstr(d2j(nowJdn())).replace(/\//g,'-');a.href=URL.createObjectURL(blob);a.download='nelora-backup-'+d+'.json';document.body.appendChild(a);a.click();a.remove();toast('فایل پشتیبان ذخیره شد',1)}
+async function srvBackup(){try{await rpc('nl_backup',{p_name:U,p_pass:P,p_force:true});const l=await rpc('nl_backup_list',{p_name:U,p_pass:P});toast('نسخه پشتیبان ساخته شد ('+fa(l.length)+' نسخه روی سرور)',1)}catch(e){toast('پشتیبان‌گیری انجام نشد')}}
+async function restoreFile(inp){const f=inp.files[0];if(!f)return;try{const j=JSON.parse(await f.text()),rows=j.rows||j;if(!Array.isArray(rows))throw 0;
+if(!confirm('اطلاعات فایل بازیابی شود؟ موارد موجود تغییر نمی‌کنند و فقط موارد گم‌شده یا حذف‌شده برمی‌گردند.'))return;
+const n=await rpc('nl_restore',{p_name:U,p_pass:P,p_rows:rows});toast(fa(n)+' مورد بررسی و بازیابی شد',1);load()}catch(e){toast('فایل معتبر نیست')}inp.value=''}
+
+const TABS=[['home','🏠','خانه'],['cap','💰','سرمایه'],['ses','✨','پاکسازی'],['alt','🛍️','علی‌البدل'],['cus','👥','مشتریان'],['rep','📊','گزارش']];
+const VIEW={home:vHome,cap:vCap,ses:vSes,alt:vAlt,cus:vCus,rep:vRep},KIND={cap:'capital',ses:'session',alt:'alt',cus:'customer'};
+function render(){if(!U)return;const sc=window.scrollY,j=nowJdn();
+$('#app').innerHTML=`<header><div class="top"><div class="brand"><img src="logo.png" alt=""> نلورا</div><div class="who">${esc(U)}<br><button onclick="logout()">خروج</button></div></div>
+<div class="quote">💬 ${QUOTES[j%QUOTES.length]}</div></header><main>${VIEW[tab]()}</main>
+${KIND[tab]?`<button class="fab" onclick="add('${KIND[tab]}')">+</button>`:''}
+<nav>${TABS.map(t=>`<button class="${tab===t[0]?'on':''}" onclick="tab='${t[0]}';render();scrollTo(0,0)"><span>${t[1]}</span>${t[2]}</button>`).join('')}</nav>`;
+window.scrollTo(0,sc)}
+function start(){render();load();rpc('nl_backup',{p_name:U,p_pass:P,p_force:false}).catch(()=>{});
+clearInterval(window._i);window._i=setInterval(()=>{if(!document.querySelector('.ov'))load()},20000)}
+try{const s=JSON.parse(localStorage.getItem('nl')||'null');if(s){U=s.U;P=s.P;start()}else showLogin()}catch(e){showLogin()}
+setTimeout(()=>{const s=$('#splash');s.classList.add('hide');setTimeout(()=>s.remove(),600)},1500);
+if('serviceWorker' in navigator)addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(()=>{}));
+</script>
+</body>
+</html>
